@@ -1,7 +1,8 @@
 {
   "name": "@geduka/api",
   "scripts": {
-    "dev": "bun run --hot src/presentation/server.ts"
+    "dev": "bun run --hot src/presentation/server.ts",
+    "prepare": "husky"
   },
   "dependencies": {
     "@hono/swagger-ui": "^0.5.0",
@@ -11,6 +12,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
-    "@types/bun": "latest"
+    "@types/bun": "latest",
+    "husky": "^9.1.7"
   }
 }

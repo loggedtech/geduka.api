@@ -1,1 +1,1 @@
-export * from "./base.handler";
+export * from './base.handler'

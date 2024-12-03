@@ -1,13 +1,13 @@
-import { OpenAPIHono } from "@hono/zod-openapi";
+import { OpenAPIHono } from '@hono/zod-openapi'
 
-import * as handlers from "./handlers";
-import configureOpenAPI from "./lib/openapi";
-import * as routes from "./routes";
+import * as handlers from './handlers'
+import configureOpenAPI from './lib/openapi'
+import * as routes from './routes'
 
-const app = new OpenAPIHono({ strict: false });
+const app = new OpenAPIHono({ strict: false })
 
-configureOpenAPI(app);
+configureOpenAPI(app)
 
-app.openapi(routes.base, handlers.base);
+app.openapi(routes.base, handlers.base)
 
-export { app };
+export { app }

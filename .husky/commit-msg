@@ -1,1 +1,1 @@
-bunx commitlint --from HEAD~1 --to HEAD --verbose
+bunx commitlint --edit $1

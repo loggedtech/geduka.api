@@ -1,5 +1,6 @@
 {
   "name": "@geduka/api",
+  "type": "module",
   "scripts": {
     "dev": "bun run --hot src/presentation/server.ts",
     "prepare": "husky"

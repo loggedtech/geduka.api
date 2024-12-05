@@ -1,11 +1,13 @@
-To install dependencies:
+# Geduka Api
+
+### Install dependencies:
 ```sh
 bun install
 ```
 
-To run:
+### Run project:
 ```sh
 bun run dev
 ```
 
-open http://localhost:3333
+Open: http://localhost:3333

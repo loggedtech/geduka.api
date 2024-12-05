@@ -1,14 +1,18 @@
-export interface NotificatioOptions {
-  name: string
+export class Notification {
   message: string
+  status: number
+
+  constructor(message: string, status: number) {
+    this.message = message
+    this.status = status
+  }
 }
 
 export class NotificationError extends Error {
-  statusCode: number
+  status: number
 
-  constructor({ message, name }: NotificatioOptions, status: number) {
+  constructor(message: string, status: number) {
     super(message)
-    this.name = name
-    this.statusCode = status
+    this.status = status
   }
 }

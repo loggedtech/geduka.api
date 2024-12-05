@@ -19,36 +19,16 @@ export class CreateSchoolService implements SchoolUsecase {
     const { name, email, phone, taxId, address: location } = data
 
     const emailExists = await this.school.findByEmail(email)
-    if (emailExists) {
-      throw new NotificationError(
-        {
-          name: 'EMAIL_ALREADY_EXISTS',
-          message: 'School email already exists',
-        },
-        409
-      )
-    }
+    if (emailExists)
+      throw new NotificationError('School email already exists', 409)
 
     const phoneExists = await this.school.findByPhone(phone)
-    if (phoneExists) {
-      throw new NotificationError(
-        {
-          name: 'PHONE_ALREADY_EXISTS',
-          message: 'School phone already exists',
-        },
-        409
-      )
-    }
+    if (phoneExists)
+      throw new NotificationError('School phone already exists', 409)
 
     const taxIdExists = await this.school.findByTaxId(taxId)
     if (taxIdExists) {
-      throw new NotificationError(
-        {
-          name: 'TAXID_ALREADY_EXISTS',
-          message: 'School tax id already exists',
-        },
-        409
-      )
+      throw new NotificationError('School tax id already exists', 409)
     }
 
     const address = await this.address.execute({ ...location })

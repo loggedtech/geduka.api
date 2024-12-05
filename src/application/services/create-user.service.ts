@@ -19,37 +19,16 @@ export class CreateUserService implements UserUsecase {
     const { name, email, phone, password, role, schoolId } = data
 
     const emailExists = await this.user.findByEmail(email)
-    if (emailExists) {
-      throw new NotificationError(
-        {
-          name: 'EMAIL_ALREADY_EXISTS',
-          message: 'User email already exists',
-        },
-        409
-      )
-    }
+    if (emailExists)
+      throw new NotificationError('User email already exists', 409)
 
     const phoneExists = await this.user.findByPhone(phone)
-    if (phoneExists) {
-      throw new NotificationError(
-        {
-          name: 'PHONE_ALREADY_EXISTS',
-          message: 'User phone already exists',
-        },
-        409
-      )
-    }
+    if (phoneExists)
+      throw new NotificationError('User phone already exists', 409)
 
     const school = await this.school.findById(schoolId)
-    if (school === null) {
-      throw new NotificationError(
-        {
-          name: 'SCHOOL_NOT_ALREADY_EXISTS',
-          message: 'School not already exists',
-        },
-        404
-      )
-    }
+    if (school === null)
+      throw new NotificationError('School not already exists', 404)
 
     const passwordHash = await this.crypto.hash(password)
     const user = User.instance({

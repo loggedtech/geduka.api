@@ -5,4 +5,5 @@ const server = Bun.serve({
   port: 3333,
 })
 
+console.log('Conventional commit test.')
 console.info('Server is running on', server.url.origin)

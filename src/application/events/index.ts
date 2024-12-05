@@ -1,1 +1,1 @@
-export * from './mail-user-on-create.event'
+export * from './send-email-when-creating-user.event'

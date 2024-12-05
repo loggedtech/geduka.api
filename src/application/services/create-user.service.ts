@@ -1,16 +1,17 @@
 import { User } from '~/domain/entities'
 
 import type { HashAdapter } from '../adapters'
-import type { MailUserOnCreateEvent } from '../events'
+import type { SendEmailWhenCreatingUserEvent } from '../events'
 import type { UserGateway } from '../gateways'
-import { NotificationError } from '../notification'
 import type { UserInput, UserOutput, UserUsecase } from '../usecases'
+
+import { NotificationError } from '../notification'
 
 export class CreateUserService implements UserUsecase {
   constructor(
+    private readonly crypto: HashAdapter,
     private readonly user: UserGateway,
-    private readonly event: MailUserOnCreateEvent,
-    private readonly crypto: HashAdapter
+    private readonly event: SendEmailWhenCreatingUserEvent
   ) {}
 
   async execute(data: UserInput): Promise<UserOutput> {
@@ -37,7 +38,7 @@ export class CreateUserService implements UserUsecase {
 
     await this.user.create(user)
 
-    this.event.emit('mail-user-on-create', { name, email })
+    this.event.emit('send-email-when-creating-user', { name, email })
 
     return { id: user.id }
   }

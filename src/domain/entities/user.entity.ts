@@ -14,7 +14,7 @@ export class User extends Entity<UserProps> {
     super(props, id)
   }
 
-  static instance(
+  public static instance(
     props: Replace<UserProps, { createdAt?: Date }>,
     id?: string
   ) {

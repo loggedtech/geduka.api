@@ -6,9 +6,9 @@ export interface MailProps {
   email: string
 }
 
-export class MailUserOnCreateEvent extends Event<MailProps> {
+export class SendEmailWhenCreatingUserEvent extends Event<MailProps> {
   constructor(private readonly mail: MailAdapter) {
-    super('mail-user-on-create')
+    super('send-email-when-creating-user')
   }
 
   async process(data: MailProps): Promise<void> {

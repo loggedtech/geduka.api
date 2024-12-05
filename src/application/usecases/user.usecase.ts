@@ -1,6 +1,8 @@
+import type { MemberProps } from '~/domain/entities'
+
 import type { Usecase } from '../usecase'
 
-export interface UserInput {
+export interface UserInput extends MemberProps {
   name: string
   email: string
   phone: string

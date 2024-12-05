@@ -1,2 +1,1 @@
-bunx biome format --write ./src
-git add --all
+bunx lint-staged

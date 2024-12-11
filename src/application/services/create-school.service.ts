@@ -1,34 +1,47 @@
+import { School } from '~/domain/entities'
+
+import { HttpCode } from '~/application/http'
+
 import type { SchoolGateway } from '../gateways'
+import { Notification, NotificationError } from '../notification'
 import type {
   AddressUsecase,
   SchoolInput,
   SchoolOutput,
   SchoolUsecase,
+  UserUsecase,
 } from '../usecases'
-
-import { School } from '~/domain/entities'
-import { NotificationError } from '../notification'
 
 export class CreateSchoolService implements SchoolUsecase {
   constructor(
     private readonly school: SchoolGateway,
-    private readonly address: AddressUsecase
+    private readonly address: AddressUsecase,
+    private readonly user: UserUsecase
   ) {}
 
-  async execute(data: SchoolInput): Promise<SchoolOutput> {
-    const { name, email, phone, taxId, address: location } = data
+  async execute(data: SchoolInput): Promise<Notification<SchoolOutput>> {
+    const { name, email, phone, taxId, password, address: location } = data
 
     const emailExists = await this.school.findByEmail(email)
     if (emailExists)
-      throw new NotificationError('School email already exists', 409)
+      throw new NotificationError(
+        'School email already exists',
+        HttpCode.CONFLICT
+      )
 
     const phoneExists = await this.school.findByPhone(phone)
     if (phoneExists)
-      throw new NotificationError('School phone already exists', 409)
+      throw new NotificationError(
+        'School phone already exists',
+        HttpCode.CONFLICT
+      )
 
     const taxIdExists = await this.school.findByTaxId(taxId)
     if (taxIdExists) {
-      throw new NotificationError('School tax id already exists', 409)
+      throw new NotificationError(
+        'School tax id already exists',
+        HttpCode.CONFLICT
+      )
     }
 
     const address = await this.address.execute({ ...location })
@@ -42,6 +55,17 @@ export class CreateSchoolService implements SchoolUsecase {
     })
     await this.school.create(school)
 
-    return { id: school.id }
+    await this.user.execute({
+      name,
+      email,
+      phone,
+      password,
+      role: 'TENANT',
+      schoolId: school.id,
+    })
+
+    return new Notification('School created successfully', HttpCode.CREATED, {
+      id: school.id,
+    })
   }
 }

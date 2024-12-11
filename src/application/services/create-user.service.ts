@@ -1,5 +1,7 @@
 import { User } from '~/domain/entities'
 
+import { HttpCode } from '~/application/http'
+
 import type { HashAdapter } from '../adapters'
 import type { SendEmailWhenCreatingUserEvent } from '../events'
 import type { SchoolGateway, UserGateway } from '../gateways'
@@ -20,15 +22,24 @@ export class CreateUserService implements UserUsecase {
 
     const emailExists = await this.user.findByEmail(email)
     if (emailExists)
-      throw new NotificationError('User email already exists', 409)
+      throw new NotificationError(
+        'User email already exists',
+        HttpCode.CONFLICT
+      )
 
     const phoneExists = await this.user.findByPhone(phone)
     if (phoneExists)
-      throw new NotificationError('User phone already exists', 409)
+      throw new NotificationError(
+        'User phone already exists',
+        HttpCode.CONFLICT
+      )
 
     const school = await this.school.findById(schoolId)
     if (school === null)
-      throw new NotificationError('School not already exists', 404)
+      throw new NotificationError(
+        'School not already exists',
+        HttpCode.NOT_FOUND
+      )
 
     const passwordHash = await this.crypto.hash(password)
     const user = User.instance({

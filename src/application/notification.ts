@@ -1,10 +1,12 @@
-export class Notification {
+export class Notification<T = undefined> {
   message: string
   status: number
+  data?: T
 
-  constructor(message: string, status: number) {
+  constructor(message: string, status: number, data?: T) {
     this.message = message
     this.status = status
+    this.data = data
   }
 }
 

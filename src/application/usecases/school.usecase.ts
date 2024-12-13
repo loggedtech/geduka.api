@@ -1,5 +1,3 @@
-import type { Notification } from '~/application/notification'
-
 import type { Usecase } from '../usecase'
 import type { AddressInput } from './address.usecase'
 
@@ -17,5 +15,4 @@ export interface SchoolOutput {
   id: string
 }
 
-export interface SchoolUsecase
-  extends Usecase<SchoolInput, Notification<SchoolOutput>> {}
+export interface SchoolUsecase extends Usecase<SchoolInput, SchoolOutput> {}

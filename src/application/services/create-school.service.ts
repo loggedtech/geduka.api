@@ -2,8 +2,8 @@ import { School } from '~/domain/entities'
 
 import { HttpCode } from '~/application/http'
 
+import { RoleOption } from '~/application/role'
 import type { SchoolGateway } from '../gateways'
-import { Notification, NotificationError } from '../notification'
 import type {
   AddressUsecase,
   SchoolInput,
@@ -12,6 +12,8 @@ import type {
   UserUsecase,
 } from '../usecases'
 
+import { NotificationError } from '../notification'
+
 export class CreateSchoolService implements SchoolUsecase {
   constructor(
     private readonly school: SchoolGateway,
@@ -19,7 +21,7 @@ export class CreateSchoolService implements SchoolUsecase {
     private readonly user: UserUsecase
   ) {}
 
-  async execute(data: SchoolInput): Promise<Notification<SchoolOutput>> {
+  async execute(data: SchoolInput): Promise<SchoolOutput> {
     const { name, email, phone, taxId, password, address: location } = data
 
     const emailExists = await this.school.findByEmail(email)
@@ -60,12 +62,10 @@ export class CreateSchoolService implements SchoolUsecase {
       email,
       phone,
       password,
-      role: 'TENANT',
+      role: RoleOption.TENANT,
       schoolId: school.id,
     })
 
-    return new Notification('School created successfully', HttpCode.CREATED, {
-      id: school.id,
-    })
+    return { id: school.id }
   }
 }

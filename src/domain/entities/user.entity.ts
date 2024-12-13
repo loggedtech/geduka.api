@@ -1,16 +1,13 @@
 import { Entity } from '../entity'
 import type { Replace } from '../replace'
 
-export interface MemberProps {
-  schoolId: string
-  role: string
-}
-
-export interface UserProps extends MemberProps {
+export interface UserProps {
   name: string
   email: string
   phone: string
   password: string
+  schoolId: string
+  role: string
   activedAt?: Date
   createdAt: Date
 }

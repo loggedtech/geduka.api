@@ -39,12 +39,8 @@
           "name": "addresses_location_id_locations_id_fk",
           "tableFrom": "addresses",
           "tableTo": "locations",
-          "columnsFrom": [
-            "location_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["location_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "cascade"
         }
@@ -133,12 +129,8 @@
           "name": "members_user_id_users_id_fk",
           "tableFrom": "members",
           "tableTo": "users",
-          "columnsFrom": [
-            "user_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["user_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "cascade"
         },
@@ -146,12 +138,8 @@
           "name": "members_school_id_schools_id_fk",
           "tableFrom": "members",
           "tableTo": "schools",
-          "columnsFrom": [
-            "school_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["school_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "cascade"
         }
@@ -159,10 +147,7 @@
       "compositePrimaryKeys": {
         "members_user_id_school_id_pk": {
           "name": "members_user_id_school_id_pk",
-          "columns": [
-            "user_id",
-            "school_id"
-          ]
+          "columns": ["user_id", "school_id"]
         }
       },
       "uniqueConstraints": {},
@@ -229,12 +214,8 @@
           "name": "schools_address_id_addresses_id_fk",
           "tableFrom": "schools",
           "tableTo": "addresses",
-          "columnsFrom": [
-            "address_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["address_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "cascade"
         }
@@ -244,23 +225,17 @@
         "schools_email_unique": {
           "name": "schools_email_unique",
           "nullsNotDistinct": false,
-          "columns": [
-            "email"
-          ]
+          "columns": ["email"]
         },
         "schools_phone_unique": {
           "name": "schools_phone_unique",
           "nullsNotDistinct": false,
-          "columns": [
-            "phone"
-          ]
+          "columns": ["phone"]
         },
         "schools_tax_id_unique": {
           "name": "schools_tax_id_unique",
           "nullsNotDistinct": false,
-          "columns": [
-            "tax_id"
-          ]
+          "columns": ["tax_id"]
         }
       },
       "policies": {},
@@ -327,16 +302,12 @@
         "users_email_unique": {
           "name": "users_email_unique",
           "nullsNotDistinct": false,
-          "columns": [
-            "email"
-          ]
+          "columns": ["email"]
         },
         "users_phone_unique": {
           "name": "users_phone_unique",
           "nullsNotDistinct": false,
-          "columns": [
-            "phone"
-          ]
+          "columns": ["phone"]
         }
       },
       "policies": {},

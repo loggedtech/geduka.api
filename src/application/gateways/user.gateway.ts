@@ -1,9 +1,21 @@
 import type { User } from '~/domain/entities'
 
-import type { Gateway } from '../gateway'
+export interface UserOptions {
+  schoolId: string
+  role: string
+}
 
-export interface UserGateway extends Gateway<User> {
-  findById(id: string): Promise<User | null>
-  findByEmail(email: string): Promise<User | null>
-  findByPhone(phone: string): Promise<User | null>
+export interface UserGateway {
+  findById(id: string, { schoolId, role }: UserOptions): Promise<User | null>
+  findByEmail(
+    email: string,
+    { schoolId, role }: UserOptions
+  ): Promise<User | null>
+  findByPhone(
+    phone: string,
+    { schoolId, role }: UserOptions
+  ): Promise<User | null>
+  create(data: User): Promise<void>
+  update(data: User): Promise<void>
+  delete(data: User): Promise<void>
 }

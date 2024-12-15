@@ -3,7 +3,7 @@ import { Entity } from '../entity'
 export interface AddressProps {
   locationId: string
   number: string
-  complement?: string
+  complement?: string | null
 }
 
 export class Address extends Entity<AddressProps> {

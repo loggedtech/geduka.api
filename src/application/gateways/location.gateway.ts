@@ -1,7 +1,8 @@
 import type { Location } from '~/domain/entities'
 
-import type { Gateway } from '../gateway'
-
-export interface LocationGateway extends Gateway<Location> {
+export interface LocationGateway {
   findByZip(zip: string): Promise<Location | null>
+  create(data: Location): Promise<void>
+  update(data: Location): Promise<void>
+  delete(data: Location): Promise<void>
 }

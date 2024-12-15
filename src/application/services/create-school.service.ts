@@ -2,7 +2,7 @@ import { School } from '~/domain/entities'
 
 import { HttpCode } from '~/application/http'
 
-import { RoleOption } from '~/application/role'
+import { RoleOption } from '~/domain/role'
 import type { SchoolGateway } from '../gateways'
 import type {
   AddressUsecase,

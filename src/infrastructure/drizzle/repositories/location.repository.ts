@@ -28,7 +28,7 @@ export class LocationRepository implements LocationGateway {
       .where(eq(locations.id, data.id))
   }
 
-  async dalete(data: Location): Promise<void> {
+  async delete(data: Location): Promise<void> {
     await db.delete(locations).where(eq(locations.id, data.id))
   }
 }

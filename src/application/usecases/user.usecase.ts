@@ -5,8 +5,6 @@ export interface UserInput {
   email: string
   phone: string
   password: string
-  schoolId: string
-  role: string
 }
 
 export interface UserOutput {

@@ -2,13 +2,12 @@ import { Entity } from '../entity'
 import type { Replace } from '../replace'
 
 export interface UserProps {
+  image?: string | null
   name: string
   email: string
   phone: string
   password: string
-  schoolId: string
-  role: string
-  activedAt?: Date
+  activedAt?: Date | null
   createdAt: Date
 }
 

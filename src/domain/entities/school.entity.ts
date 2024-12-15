@@ -2,6 +2,7 @@ import { Entity } from '../entity'
 import type { Replace } from '../replace'
 
 export interface SchoolProps {
+  image?: string | null
   name: string
   email: string
   phone: string

@@ -18,7 +18,7 @@ export class CreateUserService implements UserUsecase {
   ) {}
 
   async execute(data: UserInput): Promise<UserOutput> {
-    const { name, email, phone, password, role, schoolId } = data
+    const { name, email, phone, password } = data
 
     const emailExists = await this.user.findByEmail(email)
     if (emailExists)

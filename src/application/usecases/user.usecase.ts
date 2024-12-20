@@ -1,3 +1,5 @@
+import type { RoleOptions } from '~/domain/role'
+
 import type { Usecase } from '../usecase'
 
 export interface UserInput {
@@ -5,6 +7,8 @@ export interface UserInput {
   email: string
   phone: string
   password: string
+  schoolId: string
+  role: RoleOptions
 }
 
 export interface UserOutput {

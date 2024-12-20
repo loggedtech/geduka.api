@@ -4,7 +4,7 @@ interface MailProps {
 }
 
 export interface MailMessage {
-  from: MailProps
+  to: MailProps
   subject: string
   body: string
 }

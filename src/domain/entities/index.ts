@@ -1,4 +1,5 @@
-export * from './user.entity'
 export * from './address.entity'
 export * from './location.entity'
+export * from './member.entity'
 export * from './school.entity'
+export * from './user.entity'

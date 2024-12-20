@@ -20,15 +20,4 @@ export class LocationRepository implements LocationGateway {
   async create(data: Location): Promise<void> {
     await db.insert(locations).values({ id: data.id, ...data.props })
   }
-
-  async update(data: Location): Promise<void> {
-    await db
-      .update(locations)
-      .set({ ...data.props })
-      .where(eq(locations.id, data.id))
-  }
-
-  async delete(data: Location): Promise<void> {
-    await db.delete(locations).where(eq(locations.id, data.id))
-  }
 }

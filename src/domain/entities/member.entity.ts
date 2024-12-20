@@ -1,8 +1,8 @@
 import type { RoleOptions } from '../role'
 
 export interface MemberProps {
-  userId: string
   schoolId: string
+  userId: string
   role: RoleOptions
 }
 

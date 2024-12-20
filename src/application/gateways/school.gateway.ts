@@ -6,6 +6,4 @@ export interface SchoolGateway {
   findByPhone(phone: string): Promise<School | null>
   findByTaxId(taxId: string): Promise<School | null>
   create(data: School): Promise<void>
-  update(data: School): Promise<void>
-  delete(data: School): Promise<void>
 }

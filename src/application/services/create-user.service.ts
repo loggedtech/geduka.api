@@ -1,20 +1,16 @@
-import { User } from '~/domain/entities'
+import { Member, User } from '~/domain/entities'
 
+import type { HashAdapter } from '~/application/adapters'
+import type { MemberGateway, UserGateway } from '~/application/gateways'
 import { HttpCode } from '~/application/http'
-
-import type { HashAdapter } from '../adapters'
-import type { SendEmailWhenCreatingUserEvent } from '../events'
-import type { SchoolGateway, UserGateway } from '../gateways'
-import type { UserInput, UserOutput, UserUsecase } from '../usecases'
-
-import { NotificationError } from '../notification'
+import { NotificationError } from '~/application/notification'
+import type { UserInput, UserOutput, UserUsecase } from '~/application/usecases'
 
 export class CreateUserService implements UserUsecase {
   constructor(
     private readonly crypto: HashAdapter,
     private readonly user: UserGateway,
-    private readonly school: SchoolGateway,
-    private readonly event: SendEmailWhenCreatingUserEvent
+    private readonly member: MemberGateway
   ) {}
 
   async execute(data: UserInput): Promise<UserOutput> {
@@ -34,26 +30,18 @@ export class CreateUserService implements UserUsecase {
         HttpCode.CONFLICT
       )
 
-    const school = await this.school.findById(schoolId)
-    if (school === null)
-      throw new NotificationError(
-        'School not already exists',
-        HttpCode.NOT_FOUND
-      )
-
     const passwordHash = await this.crypto.hash(password)
     const user = User.instance({
       name,
       email,
       phone,
       password: passwordHash,
-      schoolId: school.id,
-      role,
     })
 
     await this.user.create(user)
 
-    this.event.emit('send-email-when-creating-user', { name, email })
+    const member = Member.instance({ ...data, userId: user.id })
+    await this.member.create(member)
 
     return { id: user.id }
   }

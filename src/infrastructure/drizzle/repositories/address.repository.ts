@@ -36,15 +36,4 @@ export class AddressRepository implements AddressGateway {
   async create(data: Address): Promise<void> {
     await db.insert(addresses).values({ id: data.id, ...data.props })
   }
-
-  async update(data: Address): Promise<void> {
-    await db
-      .update(addresses)
-      .set({ ...data.props })
-      .where(eq(addresses.id, data.id))
-  }
-
-  async delete(data: Address): Promise<void> {
-    await db.delete(addresses).where(eq(addresses.id, data.id))
-  }
 }
